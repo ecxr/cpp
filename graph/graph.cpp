@@ -12,6 +12,7 @@
 #include <iostream>
 #include "graph.h"
 #include "util.h"
+#include <fstream>
 
 using namespace std;
 
@@ -40,6 +41,18 @@ Graph::Graph(int size, double density, double low, double high)
     }
 }
 
+// reads a graph from a file
+Graph::Graph(char* filename) {
+  vCount_ = 0;
+  eCount_ = 0;
+  ifstream file(filename);
+  int size, u, v;
+  double weight;
+  file >> size;
+  while (file >>u >>v >>weight) { 
+    add(u,v,weight);
+  }
+}
 // number of vertices
 int Graph::V()
 {

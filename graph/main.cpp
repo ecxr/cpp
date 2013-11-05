@@ -127,15 +127,8 @@ void test_heap2()
 
 void test_file()
 {
-    ifstream infile("mst_data.txt");
-    int size, u, v, weight;
-
-    infile >> size;
-    cout << "size: size" << endl;
-    while (infile >> u >> v >> weight)
-    {
-        cout << u << "->" << v << " (" << weight << ")" << endl;
-    }
+   Graph g("mst_data.txt");
+   cout << g << endl;
 }
 
 // Runs a monte carlo simulation, for nTests, creating a random graph with the given nodes and density, each

@@ -37,6 +37,8 @@ public:
     Graph();
     // generates a random graph of given density, with random weights between low and high
     Graph(int size, double density, double low, double high);
+    // reads a graph from a file
+    Graph(char* filename);
     // number of vertices
     int V();
     // number of edges
