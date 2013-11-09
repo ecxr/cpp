@@ -150,16 +150,13 @@ void monte_carlo(int nTests, int nodes, double density, double costLow,
             density << " is " << static_cast<double>(total_edges / nTests) << endl;
 }
 
-// Main entry point
-// Runs a few tests and then launches monte carlo simulations
-int main(void)
-{
-    test_edges();
-    test_graph();
-    test_heap();
-    test_file();
-    //test_heap2();
+void test_span() {
+  Graph g(10, .8, 1, 7);
+  cout << g << endl;
+  cout << g.mst();
+}
 
+void test_monte() {
     cout    << "10 tests of 50 nodes with density of 20% with weight between 1.0 and 10.0"
             << endl;
     monte_carlo(10, 50, 0.20, 1.0, 10.0);
@@ -169,6 +166,19 @@ int main(void)
     cout    << "10 tests of 50 nodes with density of 40% with weight between 1.0 and 10.0"
             << endl;
     monte_carlo(10, 50, 0.40, 1.0, 10.0);
+}
+
+// Main entry point
+// Runs a few tests and then launches monte carlo simulations
+int main(void)
+{
+    test_edges();
+    test_graph();
+    test_heap();
+    test_file();
+    // test_heap2();
+    // test_monte();
+    test_span();
 
     return 0;
 }

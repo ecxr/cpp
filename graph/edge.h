@@ -20,73 +20,51 @@ class Edge
 public:
 
     Edge(int v, int w, double weight) :
-            v_(v), w_(w), weight_(weight)
-    {
-    }
+            v_(v), w_(w), weight_(weight) { }
 
     // start edge
-    int from()
-    {
-        return v_;
-    }
+    int from() { return v_; }
 
     // end edge
-    int to()
-    {
-        return w_;
-    }
+    int to() { return w_; }
 
     // get cost from v to w
-    double get_weight()
-    {
-        return weight_;
-    }
+    double get_weight() { return weight_; }
 
     // set cost from v to w
-    void set_weight(double weight)
-    {
-        weight_ = weight;
-    }
+    void set_weight(double weight) { weight_ = weight; }
 
-    friend bool operator==(const Edge e1, const Edge e2)
-    {
+    friend bool operator==(const Edge e1, const Edge e2) {
         return e1.weight_ == e2.weight_;
     }
 
-    friend bool operator!=(const Edge e1, const Edge e2)
-    {
+    friend bool operator!=(const Edge e1, const Edge e2) {
         return !(e1.weight_ == e2.weight_);
     }
 
-    friend bool operator<(const Edge e1, const Edge e2)
-    {
+    friend bool operator<(const Edge e1, const Edge e2) {
         return e1.weight_ < e2.weight_;
     }
 
-    friend bool operator<=(const Edge e1, const Edge e2)
-    {
+    friend bool operator<=(const Edge e1, const Edge e2) {
         return e1.weight_ <= e2.weight_;
     }
 
-    friend bool operator>(const Edge e1, const Edge e2)
-    {
+    friend bool operator>(const Edge e1, const Edge e2) {
         return e1.weight_ > e2.weight_;
     }
 
-    friend bool operator>=(const Edge e1, const Edge e2)
-    {
+    friend bool operator>=(const Edge e1, const Edge e2) {
         return e1.weight_ >= e2.weight_;
     }
 
     // prints an edge
-    friend ostream& operator<<(ostream& out, Edge e)
-    {
+    friend ostream& operator<<(ostream& out, Edge e) {
         out << e.v_ << "->" << e.w_ << " (" << e.weight_ << ")";
         return out;
     }
 
 private:
-
     int v_;         // start
     int w_;         // end
     double weight_;  // cost
@@ -94,8 +72,7 @@ private:
 
 struct EdgeComparator
 {
-    bool operator()(Edge& lhs, Edge& rhs)
-    {
+    bool operator()(Edge& lhs, Edge& rhs) {
         return lhs.get_weight() > rhs.get_weight();
     }
 };

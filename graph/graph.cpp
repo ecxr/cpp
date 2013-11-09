@@ -10,13 +10,18 @@
  */
 
 #include <iostream>
+#include <fstream>
+#include <algorithm>
+#include "edge.h"
 #include "graph.h"
 #include "util.h"
-#include <fstream>
+#include "ufind.cpp"
+#include "heap.cpp"
 
 using namespace std;
+//typedef pair<double, vector<Edge> > MST;
 
-// default constructor, creates and empty graph
+// default constructor, creates an empty graph
 Graph::Graph()
 {
     vCount_ = 0;
@@ -117,6 +122,41 @@ bool Graph::adjacent(int x, int y)
             return true;
     }
     return false;
+}
+
+MST Graph::mst() 
+{
+  vector<Edge> tree;
+  double cost = 0;
+  vector<Edge> edges;
+  ufind components(vCount_);
+
+  for (int i = 0; i < vCount_; i++) {
+    vector<Edge> v = adjacencies_[i];
+    for (int j = 0; j < v.size(); j++) {
+      edges.push_back(v[j]);
+    }
+  }
+
+  make_heap(edges.begin(), edges.end()); edges.pop_back();
+
+  // assumes graph is connected - will attempt to pop empty vector
+  // otherwise
+  while (tree.size() < vCount_ - 1) {
+    Edge next = edges.front();
+    pop_heap(edges.begin(), edges.end()); edges.pop_back();
+    while (components.sameGroup(next.to(), next.from())) {
+      next = edges.front();
+      pop_heap(edges.begin(), edges.end()); edges.pop_back();
+    }
+
+    tree.push_back(next);
+    components.merge(next.to(), next.from());
+    cost += next.get_weight();
+  }
+
+  MST foo(cost, tree);
+  return foo;
 }
 
 // returns vector of vertices that are neighbors of x

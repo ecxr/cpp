@@ -24,10 +24,12 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
+#include "mst.cpp"
 
 #include "edge.h"
 
 using namespace std;
+
 
 class Graph
 {
@@ -51,6 +53,7 @@ public:
     bool adjacent(int x, int y);
     // returns vector of vertices that are neighbors of x
     vector<int> neighbours(int x);
+    MST mst();
 
     // Get/Set node value not implemented for now.
     //void get_node_value(int x);

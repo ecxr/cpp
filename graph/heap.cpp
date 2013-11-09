@@ -105,6 +105,8 @@ int MinHeap<T>::lesserChild(T parent) {
 }
 
 #ifdef TESTHEAP
+#include "edge.h"
+
 int main() {
   MinHeap<int> h;
   int values[10] = {5,9,4,3,12,2,16,8,8,9};
@@ -117,6 +119,19 @@ int main() {
 
   for (int i = 0; i < 10; i++) {
     cout << "extracted " << h.getMin() << "\n" << h;
+  }
+
+  cout << "*********** End int test ***************" << endl;
+
+  MinHeap<Edge> eh;
+  for (int i = 0; i < 10; i++) {
+    Edge edge(i, i-1, i + 0.5 % 2);
+    cout << "inserting " << edge << "\n";
+    eh.insert(edge);
+    cout << h;
+  }
+  for (int i = 0; i < 10; i++) {
+    cout << "extracted " << eh.getMin() << "\n" << eh;
   }
 }
 #endif
