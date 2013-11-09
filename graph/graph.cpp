@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <fstream>
-#include <algorithm>
+#include <queue>
 #include "edge.h"
 #include "graph.h"
 #include "util.h"
@@ -128,26 +128,23 @@ MST Graph::mst()
 {
   vector<Edge> tree;
   double cost = 0;
-  vector<Edge> edges;
+  priority_queue<Edge, std::vector<Edge>, EdgeComparator> edges;
   ufind components(vCount_);
 
   for (int i = 0; i < vCount_; i++) {
     vector<Edge> v = adjacencies_[i];
     for (int j = 0; j < v.size(); j++) {
-      edges.push_back(v[j]);
+      edges.push(v[j]);
     }
   }
 
-  make_heap(edges.begin(), edges.end()); edges.pop_back();
 
   // assumes graph is connected - will attempt to pop empty vector
   // otherwise
   while (tree.size() < vCount_ - 1) {
-    Edge next = edges.front();
-    pop_heap(edges.begin(), edges.end()); edges.pop_back();
+    Edge next = edges.top(); edges.pop();
     while (components.sameGroup(next.to(), next.from())) {
-      next = edges.front();
-      pop_heap(edges.begin(), edges.end()); edges.pop_back();
+      next = edges.top(); edges.pop();
     }
 
     tree.push_back(next);
